@@ -16,8 +16,8 @@ infixr 0 _∙≡_
 sym : {l : Level} {A : Set l} {a b : A} -> a ≡ b -> b ≡ a
 sym refl = refl
 
-subst : {l l' : Level} {A : Set l} {C : A -> Set l'} {a b : A} -> a ≡ b -> C a -> C b
-subst refl x = x
+subst : {l l' : Level} {A : Set l} (C : A -> Set l') {a b : A} -> a ≡ b -> C a -> C b
+subst C refl x = x
 
 cong : {l l' : Level} {A : Set l} {B : Set l'} {a a' : A} (f : A -> B) -> a ≡ a' -> f a ≡ f a'
 cong f refl = refl
