@@ -79,10 +79,6 @@ Commutative×ℕ (suc n) m = lem m n ∙≡ cong (\x -> m +ℕ x) (sym (Commutat
     ∙≡ Associative+ℕ n m (n ×ℕ m)
     )
 
-Associative×ℕ : Associative ℕ _×ℕ_
-Associative×ℕ zero b c = refl
-Associative×ℕ (suc a) b c = ?
-
 Distributive×+ℕ : Distributive ℕ _×ℕ_ _+ℕ_
 Distributive×+ℕ zero b c = refl
 Distributive×+ℕ (suc a) b c =
@@ -95,6 +91,12 @@ Distributive×+ℕ (suc a) b c =
   ∙≡ sym (Associative+ℕ b c (a ×ℕ b +ℕ a ×ℕ c))
   ∙≡ cong (\x -> (b +ℕ c) +ℕ x) (Distributive×+ℕ a b c)
 
+Associative×ℕ : Associative ℕ _×ℕ_
+Associative×ℕ zero b c = refl
+Associative×ℕ (suc a) b c = ?
+
 Homomorphism×+ℕ : (a : ℕ) -> Homomorphism ℕ _+ℕ_ ℕ _×ℕ_ (\x -> a ^ℕ x)
 Homomorphism×+ℕ a zero c = sym (RightIdentity+ℕ (a ^ℕ c))
-Homomorphism×+ℕ a (suc b) c = ?
+Homomorphism×+ℕ a (suc b) c =
+  Associative×ℕ a (a ^ℕ b) (a ^ℕ c)
+  ∙≡ cong (\x -> a ×ℕ x) (Homomorphism×+ℕ a b c)
